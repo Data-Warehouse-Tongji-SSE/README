@@ -1,0 +1,6 @@
+:auto USING PERIODIC COMMIT
+LOAD CSV WITH HEADERS FROM 'file:///comments.csv' AS row
+MATCH (e:User {user_id: row.user_id})
+MATCH (c:Movie {id: row.movie_id})
+MERGE (e)-[:COMMENTED{score: row.score}]->(c)
+RETURN count(e);

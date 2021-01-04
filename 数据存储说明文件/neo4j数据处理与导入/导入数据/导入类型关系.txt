@@ -1,0 +1,6 @@
+:auto USING PERIODIC COMMIT
+LOAD CSV WITH HEADERS FROM 'file:///genres_relation.csv' AS row
+MATCH (e:Movie {id: row.movie_id})
+MATCH (c:Genres {genres_id: row.genres_id})
+MERGE (e)-[:IS_TYPE]->(c)
+RETURN count(e);

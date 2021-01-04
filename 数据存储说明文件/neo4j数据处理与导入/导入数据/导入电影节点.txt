@@ -1,0 +1,6 @@
+CREATE INDEX ON :Movie(id)
+
+:auto USING PERIODIC COMMIT
+LOAD CSV WITH HEADERS FROM 'file:///movies.csv' AS row
+MERGE (e:Movie {id: row.id, Title: row.Title, VideoTime: row.VideoTime, Points: row.Points, PointPersonNumber: row.PointPersonNumber, Year: row.Year, Month: row.Month, Day: row.Day, WeekDay: row.WeekDay})
+RETURN count(e);

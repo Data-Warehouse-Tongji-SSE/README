@@ -1,0 +1,6 @@
+CREATE INDEX ON :User(user_id)
+
+:auto USING PERIODIC COMMIT
+LOAD CSV WITH HEADERS FROM 'file:///users.csv' AS row
+MERGE (e:User {user_id: row.user_id, username: row.username})
+RETURN count(e);

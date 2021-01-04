@@ -1,0 +1,6 @@
+CREATE INDEX ON :Genres(genres_id)
+
+:auto USING PERIODIC COMMIT
+LOAD CSV WITH HEADERS FROM 'file:///genres.csv' AS row
+MERGE (e:Genres {genres_id: row.genres_id, type: row.type})
+RETURN count(e);

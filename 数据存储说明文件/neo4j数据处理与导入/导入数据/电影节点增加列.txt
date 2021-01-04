@@ -1,0 +1,5 @@
+:auto USING PERIODIC COMMIT
+LOAD CSV WITH HEADERS FROM 'file:///movies.csv' AS row
+MATCH (e:Movie {id: row.id})
+SET e.totalNumber = row.totalNumber
+RETURN count(e);
